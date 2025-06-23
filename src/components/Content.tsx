@@ -37,6 +37,72 @@ import { A11yModule } from '@angular/cdk/a11y';
 export class AppModule { }`}
         </pre>
       </div>
+
+      <h3>How ESLint Helps with ADA Compliance in Angular</h3>
+      <p>
+        <strong>ESLint</strong> can be used in Angular projects to enforce accessibility (ADA/WCAG) best practices. By adding Angular-specific ESLint packages and accessibility plugins, you can automatically check your components and templates for common accessibility issues.
+      </p>
+      <ul>
+        <li>Warns about missing ARIA attributes, alt text, and other accessibility issues in Angular templates</li>
+        <li>Enforces best practices for accessible Angular markup</li>
+        <li>Helps your project meet ADA and WCAG 2.1 AA standards</li>
+      </ul>
+      <h4>How to Set Up ESLint for Accessibility in Angular</h4>
+      <div className="code-block">
+        <pre>{`
+# Install ESLint and Angular accessibility plugin
+ng add @angular-eslint/schematics
+npm install --save-dev eslint-plugin-jsx-a11y
+
+# Example .eslintrc.json for Angular + Accessibility
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "plugin:@angular-eslint/recommended"
+      ]
+    },
+    {
+      "files": ["*.html"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ]
+    }
+  ]
+}
+`}</pre>
+      </div>
+
+      <h3>Custom ESLint Rules for ADA Compliance</h3>
+      <p>
+        You can further strengthen ADA compliance by adding custom accessibility rules to your ESLint configuration. Here is an example of a <code>rules</code> section you can add to your <code>.eslintrc.json</code>:
+      </p>
+      <div className="code-block">
+        <pre>{`
+"rules": {
+  // Enforce alt text on images
+  "@angular-eslint/template/accessibility-alt-text": "error",
+  // Require ARIA roles where appropriate
+  "@angular-eslint/template/accessibility-aria-roles": "error",
+  // Enforce valid ARIA attributes
+  "@angular-eslint/template/accessibility-valid-aria": "error",
+  // Require label for all form elements
+  "@angular-eslint/template/accessibility-label-for": "error",
+  // Enforce tabIndex is not greater than 0
+  "@angular-eslint/template/accessibility-tabindex-no-positive": "error",
+  // Enforce elements with click handlers are focusable
+  "@angular-eslint/template/accessibility-elements-content": "error",
+  // Enforce proper heading order
+  "@angular-eslint/template/accessibility-heading-has-content": "error",
+  // Enforce accessible name for buttons
+  "@angular-eslint/template/accessibility-button-name": "error"
+}
+`}</pre>
+      </div>
     </section>
   ),
   'semantic-html': (
@@ -84,7 +150,12 @@ export class AppModule { }`}
       <p>© 2024 Company Name</p>
     </footer>
   \`
-})`}
+})
+export class PageComponent {
+  mainTitle = 'Main Page Title';
+  sectionTitle = 'Section Title';
+  subsectionTitle = 'Subsection Title';
+}`}
           </pre>
         </div>
       </div>
@@ -923,158 +994,1112 @@ export class ResponsiveDesignComponent {
       </div>
     </section>
   ),
-  testing: (
-    <section id="testing" className="section">
-      <h2>Testing <span className="badge">WCAG 2.1 AA</span></h2>
+  'language-declaration': (
+    <section id="language-declaration" className="section">
+      <h2>Language Declaration <span className="badge">WCAG 2.1 AA 3.1.1</span></h2>
       
       <div className="guideline">
-        <h3>Automated Testing Tools</h3>
-        <p>Use automated tools to catch common accessibility issues.</p>
-        
-        <div className="success">
-          <strong>Recommended Testing Tools:</strong>
-          <ul>
-            <li>axe-core (axe-core-angular)</li>
-            <li>WAVE Web Accessibility Evaluator</li>
-            <li>Lighthouse Accessibility Audit</li>
-            <li>pa11y</li>
-            <li>Accessibility Insights</li>
-          </ul>
-        </div>
+        <h3>Page Language</h3>
+        <p>Declare the primary language of the page using the lang attribute.</p>
         
         <div className="code-block">
           <pre>
-{`// Angular testing with axe-core
-import { axe, toHaveNoViolations } from 'jest-axe';
+{`<!-- HTML document with language declaration -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ADA Compliance Guide</title>
+</head>
+<body>
+  <!-- Content in English -->
+</body>
+</html>
 
-describe('Accessibility Tests', () => {
-  it('should not have accessibility violations', async () => {
-    const { debugElement } = fixture;
-    const results = await axe(debugElement.nativeElement);
-    expect(results).toHaveNoViolations();
-  });
+<!-- Angular component with language support -->
+@Component({
+  selector: 'app-root',
+  template: \`
+    <div [attr.lang]="currentLanguage">
+      <h1>{{pageTitle}}</h1>
+      <p>{{pageDescription}}</p>
+    </div>
+  \`
+})
+export class AppComponent {
+  currentLanguage = 'en';
+  pageTitle = 'ADA Compliance Guide';
+  pageDescription = 'Complete guide to building accessible applications.';
   
-  it('should have proper heading structure', () => {
-    const headings = fixture.debugElement.queryAll(By.css('h1, h2, h3, h4, h5, h6'));
-    expect(headings.length).toBeGreaterThan(0);
+  setLanguage(lang: string) {
+    this.currentLanguage = lang;
+    document.documentElement.lang = lang;
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>Language Changes</h3>
+        <p>Indicate when content changes to a different language.</p>
+        
+        <div className="code-block">
+          <pre>
+{`@Component({
+  template: \`
+    <p>Welcome to our application.</p>
+    <p lang="es">Bienvenido a nuestra aplicación.</p>
+    <p lang="fr">Bienvenue dans notre application.</p>
     
-    // Check for proper hierarchy
-    const headingLevels = headings.map(h => 
-      parseInt(h.nativeElement.tagName.charAt(1))
-    );
+    <!-- For longer passages -->
+    <blockquote lang="de">
+      <p>Dies ist ein längerer Text auf Deutsch.</p>
+      <p>Er enthält mehrere Absätze.</p>
+    </blockquote>
     
-    // Ensure no skipped levels
-    for (let i = 1; i < headingLevels.length; i++) {
-      expect(headingLevels[i] - headingLevels[i-1]).toBeLessThanOrEqual(1);
+    <!-- Dynamic language changes -->
+    <div [attr.lang]="getLanguageForContent(content)">
+      {{content}}
+    </div>
+  \`
+})
+export class MultilingualComponent {
+  getLanguageForContent(content: string): string {
+    // Logic to determine content language
+    if (content.includes('hola') || content.includes('gracias')) {
+      return 'es';
     }
-  });
+    return 'en';
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+    </section>
+  ),
+  'captions-video': (
+    <section id="captions-video" className="section">
+      <h2>Captions for Video <span className="badge">WCAG 2.1 AA 1.2.2</span></h2>
+      
+      <div className="guideline">
+        <h3>Synchronized Captions</h3>
+        <p>Provide synchronized captions for all video content that contains speech.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Video with captions -->
+<video controls>
+  <source src="presentation.mp4" type="video/mp4">
+  <track 
+    kind="captions" 
+    src="presentation-captions.vtt" 
+    srclang="en" 
+    label="English"
+    default>
+  <track 
+    kind="captions" 
+    src="presentation-captions-es.vtt" 
+    srclang="es" 
+    label="Español">
+  Your browser does not support the video tag.
+</video>
+
+<!-- Angular component with video captions -->
+@Component({
+  selector: 'app-video-player',
+  template: \`
+    <div class="video-container">
+      <video 
+        #videoPlayer
+        controls
+        [attr.aria-describedby]="'video-description-' + videoId">
+        <source [src]="videoSrc" [type]="videoType">
+        <track 
+          *ngFor="let caption of captions"
+          kind="captions"
+          [src]="caption.src"
+          [srclang]="caption.language"
+          [label]="caption.label"
+          [default]="caption.isDefault">
+      </video>
+      
+      <div [id]="'video-description-' + videoId" class="sr-only">
+        {{videoDescription}}
+      </div>
+      
+      <div class="caption-controls">
+        <button 
+          *ngFor="let caption of captions"
+          (click)="selectCaption(caption)"
+          [class.active]="caption.isDefault">
+          {{caption.label}}
+        </button>
+      </div>
+    </div>
+  \`
+})
+export class VideoPlayerComponent {
+  @Input() videoId: string = '';
+  @Input() videoSrc: string = '';
+  @Input() videoType: string = 'video/mp4';
+  @Input() videoDescription: string = '';
   
-  it('should have proper form labels', () => {
-    const inputs = fixture.debugElement.queryAll(By.css('input, select, textarea'));
+  captions = [
+    { src: 'captions-en.vtt', language: 'en', label: 'English', isDefault: true },
+    { src: 'captions-es.vtt', language: 'es', label: 'Español', isDefault: false }
+  ];
+  
+  selectCaption(caption: any) {
+    this.captions.forEach(c => c.isDefault = false);
+    caption.isDefault = true;
+    // Update video track
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>Live Captions</h3>
+        <p>Provide captions for live video content.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Live video with real-time captions -->
+<video controls>
+  <source src="live-stream.mp4" type="video/mp4">
+  <track 
+    kind="captions" 
+    src="live-captions.vtt" 
+    srclang="en" 
+    label="Live Captions">
+</video>
+
+<!-- WebVTT file example (live-captions.vtt) -->
+WEBVTT
+
+00:00:01.000 --> 00:00:04.000
+Welcome to our live presentation
+
+00:00:04.500 --> 00:00:07.000
+Today we'll discuss accessibility
+
+00:00:07.500 --> 00:00:10.000
+and how to implement it properly`}
+          </pre>
+        </div>
+      </div>
+    </section>
+  ),
+  'audio-description': (
+    <section id="audio-description" className="section">
+      <h2>Audio Description <span className="badge">WCAG 2.1 AA 1.2.3</span></h2>
+      
+      <div className="guideline">
+        <h3>Audio Descriptions for Video</h3>
+        <p>Provide audio descriptions for video content where visual information is important to understanding.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Video with audio description -->
+<video controls>
+  <source src="presentation.mp4" type="video/mp4">
+  <track 
+    kind="descriptions" 
+    src="presentation-description.vtt" 
+    srclang="en" 
+    label="Audio Description">
+  <track 
+    kind="captions" 
+    src="presentation-captions.vtt" 
+    srclang="en" 
+    label="Captions">
+</video>
+
+<!-- Angular component with audio description -->
+@Component({
+  selector: 'app-accessible-video',
+  template: \`
+    <div class="video-wrapper">
+      <video 
+        #video
+        controls
+        [attr.aria-describedby]="'video-info-' + videoId">
+        <source [src]="videoSrc" [type]="videoType">
+        <track 
+          kind="descriptions"
+          [src]="audioDescriptionSrc"
+          srclang="en"
+          label="Audio Description">
+        <track 
+          kind="captions"
+          [src]="captionsSrc"
+          srclang="en"
+          label="Captions">
+      </video>
+      
+      <div [id]="'video-info-' + videoId" class="video-info">
+        <p><strong>Title:</strong> {{videoTitle}}</p>
+        <p><strong>Duration:</strong> {{videoDuration}}</p>
+        <p><strong>Description:</strong> {{videoDescription}}</p>
+        <p><strong>Audio Description:</strong> Available</p>
+        <p><strong>Captions:</strong> Available</p>
+      </div>
+      
+      <div class="accessibility-controls">
+        <button 
+          (click)="toggleAudioDescription()"
+          [class.active]="audioDescriptionEnabled">
+          Audio Description
+        </button>
+        <button 
+          (click)="toggleCaptions()"
+          [class.active]="captionsEnabled">
+          Captions
+        </button>
+      </div>
+    </div>
+  \`
+})
+export class AccessibleVideoComponent {
+  @Input() videoId: string = '';
+  @Input() videoSrc: string = '';
+  @Input() videoType: string = 'video/mp4';
+  @Input() videoTitle: string = '';
+  @Input() videoDuration: string = '';
+  @Input() videoDescription: string = '';
+  @Input() audioDescriptionSrc: string = '';
+  @Input() captionsSrc: string = '';
+  
+  audioDescriptionEnabled = false;
+  captionsEnabled = false;
+  
+  toggleAudioDescription() {
+    this.audioDescriptionEnabled = !this.audioDescriptionEnabled;
+    // Enable/disable audio description track
+  }
+  
+  toggleCaptions() {
+    this.captionsEnabled = !this.captionsEnabled;
+    // Enable/disable captions track
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>When Audio Description is Required</h3>
+        <p>Audio descriptions are needed when visual information is not conveyed through the audio track.</p>
+        
+        <div className="highlight">
+          <strong>Examples requiring audio description:</strong>
+          <ul>
+            <li>Charts, graphs, or diagrams shown without verbal explanation</li>
+            <li>Actions or gestures that are important to understanding</li>
+            <li>Text displayed on screen that is not read aloud</li>
+            <li>Visual-only content like silent films or animations</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  ),
+  'data-tables': (
+    <section id="data-tables" className="section">
+      <h2>Data Tables <span className="badge">WCAG 2.1 AA 1.3.1</span></h2>
+      
+      <div className="guideline">
+        <h3>Table Headers and Relationships</h3>
+        <p>Use proper table markup with headers to establish relationships between data cells.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Simple data table with headers -->
+<table>
+  <caption>Monthly Sales Report</caption>
+  <thead>
+    <tr>
+      <th scope="col">Month</th>
+      <th scope="col">Revenue</th>
+      <th scope="col">Units Sold</th>
+      <th scope="col">Growth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">January</th>
+      <td>$50,000</td>
+      <td>1,250</td>
+      <td>+5%</td>
+    </tr>
+    <tr>
+      <th scope="row">February</th>
+      <td>$52,000</td>
+      <td>1,300</td>
+      <td>+4%</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Angular component with accessible table -->
+@Component({
+  selector: 'app-data-table',
+  template: \`
+    <table [attr.aria-describedby]="'table-description-' + tableId">
+      <caption>{{tableCaption}}</caption>
+      <thead>
+        <tr>
+          <th 
+            *ngFor="let column of columns" 
+            [scope]="'col'"
+            [attr.aria-sort]="getSortDirection(column.key)">
+            {{column.label}}
+            <button 
+              (click)="sortBy(column.key)"
+              [attr.aria-label]="'Sort by ' + column.label"
+              class="sort-button">
+              {{getSortIcon(column.key)}}
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of sortedData; let i = index">
+          <th 
+            *ngFor="let column of columns; let j = index"
+            [scope]="j === 0 ? 'row' : null"
+            [attr.aria-describedby]="'col-' + column.key">
+            {{row[column.key]}}
+          </th>
+        </tr>
+      </tbody>
+    </table>
     
-    inputs.forEach(input => {
-      const id = input.nativeElement.getAttribute('id');
-      if (id) {
-        const label = fixture.debugElement.query(By.css(\`label[for="\${id}"]\`));
-        expect(label).toBeTruthy();
+    <div [id]="'table-description-' + tableId" class="sr-only">
+      {{tableDescription}}
+    </div>
+  \`
+})
+export class DataTableComponent {
+  @Input() tableId: string = '';
+  @Input() tableCaption: string = '';
+  @Input() tableDescription: string = '';
+  @Input() columns: Array<{key: string, label: string}> = [];
+  @Input() data: any[] = [];
+  
+  sortedData: any[] = [];
+  sortColumn: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+  
+  ngOnInit() {
+    this.sortedData = [...this.data];
+  }
+  
+  sortBy(columnKey: string) {
+    if (this.sortColumn === columnKey) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = columnKey;
+      this.sortDirection = 'asc';
+    }
+    
+    this.sortedData.sort((a, b) => {
+      const aVal = a[columnKey];
+      const bVal = b[columnKey];
+      
+      if (this.sortDirection === 'asc') {
+        return aVal > bVal ? 1 : -1;
+      } else {
+        return aVal < bVal ? 1 : -1;
       }
     });
-  });
-});
-
-// Manual testing checklist
-const accessibilityChecklist = [
-  'Can navigate using only keyboard?',
-  'Are all interactive elements focusable?',
-  'Is there sufficient color contrast?',
-  'Are images properly labeled?',
-  'Do forms have proper labels and error messages?',
-  'Is the heading structure logical?',
-  'Are ARIA attributes used correctly?',
-  'Does the site work with screen readers?'
-];`}
+  }
+  
+  getSortDirection(columnKey: string): string {
+    if (this.sortColumn === columnKey) {
+      return this.sortDirection;
+    }
+    return 'none';
+  }
+  
+  getSortIcon(columnKey: string): string {
+    if (this.sortColumn === columnKey) {
+      return this.sortDirection === 'asc' ? '↑' : '↓';
+    }
+    return '↕';
+  }
+}`}
           </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>Complex Tables</h3>
+        <p>For complex tables, use additional ARIA attributes to clarify relationships.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Complex table with multiple header levels -->
+<table>
+  <caption>Product Inventory by Region</caption>
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2">Product</th>
+      <th scope="colgroup" colspan="2">North Region</th>
+      <th scope="colgroup" colspan="2">South Region</th>
+    </tr>
+    <tr>
+      <th scope="col">In Stock</th>
+      <th scope="col">On Order</th>
+      <th scope="col">In Stock</th>
+      <th scope="col">On Order</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Widget A</th>
+      <td>150</td>
+      <td>25</td>
+      <td>200</td>
+      <td>50</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Angular component for complex tables -->
+@Component({
+  template: \`
+    <table>
+      <caption>{{tableCaption}}</caption>
+      <thead>
+        <tr *ngFor="let headerRow of headerRows; let i = index">
+          <th 
+            *ngFor="let cell of headerRow"
+            [scope]="cell.scope"
+            [rowspan]="cell.rowspan"
+            [colspan]="cell.colspan"
+            [attr.aria-describedby]="cell.description">
+            {{cell.text}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dataRow of dataRows">
+          <th 
+            *ngFor="let cell of dataRow; let j = index"
+            [scope]="j === 0 ? 'row' : null">
+            {{cell}}
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  \`
+})
+export class ComplexTableComponent {
+  tableCaption = 'Complex Data Table';
+  headerRows = [
+    [
+      { text: 'Product', scope: 'col', rowspan: 2, colspan: 1 },
+      { text: 'North Region', scope: 'colgroup', rowspan: 1, colspan: 2 },
+      { text: 'South Region', scope: 'colgroup', rowspan: 1, colspan: 2 }
+    ],
+    [
+      { text: 'In Stock', scope: 'col', rowspan: 1, colspan: 1 },
+      { text: 'On Order', scope: 'col', rowspan: 1, colspan: 1 },
+      { text: 'In Stock', scope: 'col', rowspan: 1, colspan: 1 },
+      { text: 'On Order', scope: 'col', rowspan: 1, colspan: 1 }
+    ]
+  ];
+  dataRows = [
+    ['Widget A', '150', '25', '200', '50'],
+    ['Widget B', '75', '10', '100', '20']
+  ];
+}`}
+          </pre>
+        </div>
+      </div>
+    </section>
+  ),
+  'status-messages': (
+    <section id="status-messages" className="section">
+      <h2>Status Messages <span className="badge">WCAG 2.1 AA 4.1.3</span></h2>
+      
+      <div className="guideline">
+        <h3>ARIA Live Regions</h3>
+        <p>Use ARIA live regions to announce dynamic content changes to screen readers.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Status message with ARIA live region -->
+<div 
+  aria-live="polite" 
+  aria-atomic="true"
+  class="status-message"
+  [attr.aria-label]="statusMessage">
+  {{statusMessage}}
+</div>
+
+<!-- Angular component with live regions -->
+@Component({
+  selector: 'app-status-announcer',
+  template: \`
+    <!-- Polite announcements for non-critical updates -->
+    <div 
+      aria-live="polite" 
+      aria-atomic="true"
+      class="sr-only"
+      [attr.aria-label]="politeMessage">
+      {{politeMessage}}
+    </div>
+    
+    <!-- Assertive announcements for critical updates -->
+    <div 
+      aria-live="assertive" 
+      aria-atomic="true"
+      class="sr-only"
+      [attr.aria-label]="assertiveMessage">
+      {{assertiveMessage}}
+    </div>
+    
+    <!-- Status updates in the UI -->
+    <div class="status-container">
+      <div 
+        *ngIf="statusMessage"
+        class="status-banner"
+        [class]="statusType"
+        role="status"
+        aria-live="polite">
+        {{statusMessage}}
+      </div>
+      
+      <div 
+        *ngIf="errorMessage"
+        class="error-banner"
+        role="alert"
+        aria-live="assertive">
+        {{errorMessage}}
+      </div>
+    </div>
+  \`
+})
+export class StatusAnnouncerComponent {
+  politeMessage = '';
+  assertiveMessage = '';
+  statusMessage = '';
+  errorMessage = '';
+  
+  announcePolite(message: string) {
+    this.politeMessage = message;
+    // Clear after announcement
+    setTimeout(() => this.politeMessage = '', 1000);
+  }
+  
+  announceAssertive(message: string) {
+    this.assertiveMessage = message;
+    // Clear after announcement
+    setTimeout(() => this.assertiveMessage = '', 1000);
+  }
+  
+  showStatus(message: string, type: 'success' | 'info' | 'warning' = 'info') {
+    this.statusMessage = message;
+    this.statusType = type;
+    // Auto-hide after 5 seconds
+    setTimeout(() => this.statusMessage = '', 5000);
+  }
+  
+  showError(message: string) {
+    this.errorMessage = message;
+    // Auto-hide after 10 seconds
+    setTimeout(() => this.errorMessage = '', 10000);
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>Progress Indicators</h3>
+        <p>Provide accessible progress indicators for long-running operations.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Progress bar with ARIA attributes -->
+<div class="progress-container">
+  <div 
+    class="progress-bar"
+    role="progressbar"
+    [attr.aria-valuenow]="progress"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-valuetext]="progressText">
+    <div 
+      class="progress-fill"
+      [style.width.%]="progress">
+    </div>
+  </div>
+  <div class="progress-text">{{progressText}}</div>
+</div>
+
+<!-- Angular component with progress tracking -->
+@Component({
+  selector: 'app-progress-tracker',
+  template: \`
+    <div class="progress-wrapper">
+      <div 
+        class="progress-bar"
+        role="progressbar"
+        [attr.aria-valuenow]="currentProgress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [attr.aria-valuetext]="progressDescription">
+        <div 
+          class="progress-fill"
+          [style.width.%]="currentProgress">
+        </div>
+      </div>
+      
+      <div class="progress-info">
+        <span class="progress-text">{{progressDescription}}</span>
+        <span class="progress-percentage">{{currentProgress}}%</span>
+      </div>
+      
+      <div 
+        *ngIf="statusMessage"
+        class="status-message"
+        role="status"
+        aria-live="polite">
+        {{statusMessage}}
+      </div>
+    </div>
+  \`
+})
+export class ProgressTrackerComponent {
+  currentProgress = 0;
+  progressDescription = 'Loading...';
+  statusMessage = '';
+  
+  updateProgress(progress: number, description: string) {
+    this.currentProgress = progress;
+    this.progressDescription = description;
+    
+    if (progress === 100) {
+      this.statusMessage = 'Operation completed successfully';
+    } else if (progress > 0) {
+      this.statusMessage = \`Processing... \${progress}% complete\`;
+    }
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+    </section>
+  ),
+  'target-size': (
+    <section id="target-size" className="section">
+      <h2>Target Size <span className="badge">WCAG 2.1 AA 2.5.5</span></h2>
+      
+      <div className="guideline">
+        <h3>Minimum Touch Target Size</h3>
+        <p>Ensure touch targets are at least 44px × 44px to accommodate users with motor disabilities.</p>
+        
+        <div className="code-block">
+          <pre>
+{`/* CSS for minimum touch target size */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* For smaller visual elements, use padding */
+.small-button {
+  width: 24px;
+  height: 24px;
+  padding: 10px; /* Creates 44px × 44px touch target */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Angular component with proper touch targets */
+@Component({
+  selector: 'app-touch-friendly-buttons',
+  template: \`
+    <div class="button-group">
+      <!-- Standard button with proper touch target -->
+      <button 
+        class="touch-target primary-button"
+        (click)="handleAction('primary')"
+        [attr.aria-label]="'Primary action: ' + primaryLabel">
+        {{primaryLabel}}
+      </button>
+      
+      <!-- Icon button with expanded touch target -->
+      <button 
+        class="icon-button touch-target"
+        (click)="handleAction('delete')"
+        aria-label="Delete item">
+        <span class="icon">🗑️</span>
+      </button>
+      
+      <!-- Small visual element with padding for touch target -->
+      <button 
+        class="small-button"
+        (click)="handleAction('close')"
+        aria-label="Close dialog">
+        <span class="close-icon">×</span>
+      </button>
+    </div>
+    
+    <!-- Navigation with touch-friendly targets -->
+    <nav class="touch-nav">
+      <a 
+        *ngFor="let item of navItems"
+        [routerLink]="item.route"
+        class="nav-link touch-target"
+        [attr.aria-current]="isCurrentPage(item.route) ? 'page' : null">
+        {{item.label}}
+      </a>
+    </nav>
+  \`,
+  styles: [\`
+    .touch-target {
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .primary-button {
+      background: #007bff;
+      color: white;
+      padding: 12px 24px;
+    }
+    
+    .icon-button {
+      background: transparent;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+    
+    .small-button {
+      width: 24px;
+      height: 24px;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: #333;
+      padding: 12px 16px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .nav-link:hover,
+    .nav-link:focus {
+      background-color: #f0f0f0;
+      outline: 2px solid #007bff;
+    }
+    
+    .nav-link[aria-current="page"] {
+      background-color: #007bff;
+      color: white;
+    }
+  \`]
+})
+export class TouchFriendlyButtonsComponent {
+  primaryLabel = 'Submit';
+  navItems = [
+    { label: 'Home', route: '/home' },
+    { label: 'About', route: '/about' },
+    { label: 'Contact', route: '/contact' }
+  ];
+  
+  handleAction(action: string) {
+    console.log('Action:', action);
+  }
+  
+  isCurrentPage(route: string): boolean {
+    return this.router.url === route;
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>Spacing Between Targets</h3>
+        <p>Provide adequate spacing between touch targets to prevent accidental activation.</p>
+        
+        <div className="code-block">
+          <pre>
+{`/* CSS for proper spacing between touch targets */
+.button-group {
+  display: flex;
+  gap: 8px; /* Minimum spacing between buttons */
+  align-items: center;
+}
+
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  margin: 4px; /* Additional spacing */
+}
+
+/* For inline elements, ensure proper spacing */
+.inline-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.inline-controls button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+}
+
+/* Responsive considerations */
+@media (max-width: 768px) {
+  .button-group {
+    gap: 12px; /* More spacing on mobile */
+  }
+  
+  .touch-target {
+    min-width: 48px; /* Slightly larger on mobile */
+    min-height: 48px;
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+    </section>
+  ),
+  'input-purpose': (
+    <section id="input-purpose" className="section">
+      <h2>Input Purpose <span className="badge">WCAG 2.1 AA 1.3.5</span></h2>
+      
+      <div className="guideline">
+        <h3>Autocomplete Attributes</h3>
+        <p>Use autocomplete attributes to help users and assistive technologies understand input purpose.</p>
+        
+        <div className="code-block">
+          <pre>
+{`<!-- Form inputs with autocomplete attributes -->
+<form>
+  <label for="name">Full Name</label>
+  <input 
+    id="name"
+    type="text"
+    autocomplete="name"
+    required>
+  
+  <label for="email">Email Address</label>
+  <input 
+    id="email"
+    type="email"
+    autocomplete="email"
+    required>
+  
+  <label for="phone">Phone Number</label>
+  <input 
+    id="phone"
+    type="tel"
+    autocomplete="tel"
+    required>
+  
+  <label for="address">Street Address</label>
+  <input 
+    id="address"
+    type="text"
+    autocomplete="street-address"
+    required>
+  
+  <label for="city">City</label>
+  <input 
+    id="city"
+    type="text"
+    autocomplete="address-level2"
+    required>
+  
+  <label for="zip">ZIP Code</label>
+  <input 
+    id="zip"
+    type="text"
+    autocomplete="postal-code"
+    required>
+</form>
+
+<!-- Angular component with autocomplete -->
+@Component({
+  selector: 'app-accessible-form',
+  template: \`
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          autocomplete="given-name"
+          [attr.aria-invalid]="isFieldInvalid('firstName')"
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          autocomplete="family-name"
+          [attr.aria-invalid]="isFieldInvalid('lastName')"
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          [attr.aria-invalid]="isFieldInvalid('email')"
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          autocomplete="tel"
+          [attr.aria-invalid]="isFieldInvalid('phone')"
+          required>
+      </div>
+      
+      <div class="form-group">
+        <label for="organization">Organization</label>
+        <input
+          id="organization"
+          type="text"
+          formControlName="organization"
+          autocomplete="organization"
+          [attr.aria-invalid]="isFieldInvalid('organization')">
+      </div>
+      
+      <div class="form-group">
+        <label for="jobTitle">Job Title</label>
+        <input
+          id="jobTitle"
+          type="text"
+          formControlName="jobTitle"
+          autocomplete="organization-title"
+          [attr.aria-invalid]="isFieldInvalid('jobTitle')">
+      </div>
+      
+      <button type="submit" [disabled]="userForm.invalid">
+        Submit Form
+      </button>
+    </form>
+  \`
+})
+export class AccessibleFormComponent implements OnInit {
+  userForm: FormGroup;
+  
+  constructor(private fb: FormBuilder) {
+    this.userForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      organization: [''],
+      jobTitle: ['']
+    });
+  }
+  
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.userForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
+  }
+  
+  onSubmit() {
+    if (this.userForm.valid) {
+      console.log('Form submitted:', this.userForm.value);
+    }
+  }
+}`}
+          </pre>
+        </div>
+      </div>
+
+      <div className="guideline">
+        <h3>Common Autocomplete Values</h3>
+        <p>Use appropriate autocomplete values for different types of input fields.</p>
+        
+        <div className="highlight">
+          <strong>Common autocomplete attributes:</strong>
+          <ul>
+            <li><code>name</code> - Full name</li>
+            <li><code>given-name</code> - First name</li>
+            <li><code>family-name</code> - Last name</li>
+            <li><code>email</code> - Email address</li>
+            <li><code>tel</code> - Phone number</li>
+            <li><code>street-address</code> - Street address</li>
+            <li><code>postal-code</code> - ZIP/Postal code</li>
+            <li><code>country</code> - Country</li>
+            <li><code>organization</code> - Company/Organization</li>
+            <li><code>organization-title</code> - Job title</li>
+            <li><code>username</code> - Username</li>
+            <li><code>current-password</code> - Current password</li>
+            <li><code>new-password</code> - New password</li>
+            <li><code>cc-name</code> - Credit card holder name</li>
+            <li><code>cc-number</code> - Credit card number</li>
+            <li><code>cc-exp</code> - Credit card expiration</li>
+          </ul>
         </div>
       </div>
     </section>
   ),
   checklist: (
     <section id="checklist" className="section">
-      <h2>Final Checklist <span className="badge">WCAG 2.1 AA</span></h2>
-      
-      <div className="guideline">
-        <h3>Pre-Launch Accessibility Review</h3>
-        <p>Complete this checklist before launching your application.</p>
-        
-        <div className="highlight">
-          <h4>Semantic HTML</h4>
-          <ul>
-            <li>✓ Use proper HTML elements (button, nav, main, etc.)</li>
-            <li>✓ Maintain logical heading hierarchy</li>
-            <li>✓ Use semantic landmarks (header, nav, main, footer)</li>
-            <li>✓ Provide skip links for keyboard users</li>
-          </ul>
-        </div>
-        
-        <div className="highlight">
-          <h4>Keyboard Navigation</h4>
-          <ul>
-            <li>✓ All interactive elements are keyboard accessible</li>
-            <li>✓ Logical tab order throughout the application</li>
-            <li>✓ Visible focus indicators</li>
-            <li>✓ No keyboard traps</li>
-          </ul>
-        </div>
-        
-        <div className="highlight">
-          <h4>ARIA and Labels</h4>
-          <ul>
-            <li>✓ All form controls have proper labels</li>
-            <li>✓ Images have appropriate alt text</li>
-            <li>✓ ARIA attributes used correctly</li>
-            <li>✓ Dynamic content updates announced</li>
-          </ul>
-        </div>
-        
-        <div className="highlight">
-          <h4>Color and Contrast</h4>
-          <ul>
-            <li>✓ Minimum 4.5:1 contrast ratio for normal text</li>
-            <li>✓ Minimum 3:1 contrast ratio for large text</li>
-            <li>✓ Information not conveyed by color alone</li>
-            <li>✓ Focus indicators visible in high contrast mode</li>
-          </ul>
-        </div>
-        
-        <div className="highlight">
-          <h4>Forms and Error Handling</h4>
-          <ul>
-            <li>✓ All form fields have labels</li>
-            <li>✓ Error messages are clear and accessible</li>
-            <li>✓ Required fields are indicated</li>
-            <li>✓ Form validation provides helpful feedback</li>
-          </ul>
-        </div>
-        
-        <div className="highlight">
-          <h4>Testing</h4>
-          <ul>
-            <li>✓ Automated accessibility testing completed</li>
-            <li>✓ Manual keyboard navigation testing</li>
-            <li>✓ Screen reader testing performed</li>
-            <li>✓ Mobile accessibility verified</li>
-          </ul>
-        </div>
-        
-        <div className="success">
-          <h4>Additional Resources</h4>
-          <ul>
-            <li><a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener">WCAG 2.1 Quick Reference</a></li>
-            <li><a href="https://webaim.org/" target="_blank" rel="noopener">WebAIM Resources</a></li>
-            <li><a href="https://www.deque.com/axe/" target="_blank" rel="noopener">axe-core Documentation</a></li>
-            <li><a href="https://www.nvaccess.org/about-nvda/" target="_blank" rel="noopener">NVDA Screen Reader</a></li>
-          </ul>
-        </div>
+      <h2>Accessibility & Code Quality Checklist</h2>
+      <ul>
+        <li>Use semantic HTML and ARIA roles</li>
+        <li>Ensure keyboard navigation and visible focus outlines</li>
+        <li>Maintain sufficient color contrast</li>
+        <li>Label all form fields and controls</li>
+        <li>Provide alt text for images and media</li>
+        <li>Test with screen readers and keyboard only</li>
+        <li>Run ESLint with <code>next/core-web-vitals</code> and <code>next/typescript</code> rules</li>
+        <li>Set up Husky to run <code>npm run lint</code> before commits</li>
+        <li>Use automated tools like <code>axe-core</code> or Lighthouse for accessibility testing</li>
+      </ul>
+      <div className="code-block">
+        <pre>{`
+# Install Husky and add pre-commit hook
+npm install husky --save-dev
+npx husky install
+npx husky add .husky/pre-commit "npm run lint"
+
+# Run accessibility tests
+npx axe .
+# or use Lighthouse in Chrome DevTools
+`}</pre>
       </div>
     </section>
   ),
