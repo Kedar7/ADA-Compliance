@@ -37,72 +37,6 @@ import { A11yModule } from '@angular/cdk/a11y';
 export class AppModule { }`}
         </pre>
       </div>
-
-      <h3>How ESLint Helps with ADA Compliance in Angular</h3>
-      <p>
-        <strong>ESLint</strong> can be used in Angular projects to enforce accessibility (ADA/WCAG) best practices. By adding Angular-specific ESLint packages and accessibility plugins, you can automatically check your components and templates for common accessibility issues.
-      </p>
-      <ul>
-        <li>Warns about missing ARIA attributes, alt text, and other accessibility issues in Angular templates</li>
-        <li>Enforces best practices for accessible Angular markup</li>
-        <li>Helps your project meet ADA and WCAG 2.1 AA standards</li>
-      </ul>
-      <h4>How to Set Up ESLint for Accessibility in Angular</h4>
-      <div className="code-block">
-        <pre>{`
-# Install ESLint and Angular accessibility plugin
-ng add @angular-eslint/schematics
-npm install --save-dev eslint-plugin-jsx-a11y
-
-# Example .eslintrc.json for Angular + Accessibility
-{
-  "root": true,
-  "ignorePatterns": ["projects/**/*"],
-  "overrides": [
-    {
-      "files": ["*.ts"],
-      "extends": [
-        "plugin:@angular-eslint/recommended"
-      ]
-    },
-    {
-      "files": ["*.html"],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended",
-        "plugin:@angular-eslint/template/accessibility"
-      ]
-    }
-  ]
-}
-`}</pre>
-      </div>
-
-      <h3>Custom ESLint Rules for ADA Compliance</h3>
-      <p>
-        You can further strengthen ADA compliance by adding custom accessibility rules to your ESLint configuration. Here is an example of a <code>rules</code> section you can add to your <code>.eslintrc.json</code>:
-      </p>
-      <div className="code-block">
-        <pre>{`
-"rules": {
-  // Enforce alt text on images
-  "@angular-eslint/template/accessibility-alt-text": "error",
-  // Require ARIA roles where appropriate
-  "@angular-eslint/template/accessibility-aria-roles": "error",
-  // Enforce valid ARIA attributes
-  "@angular-eslint/template/accessibility-valid-aria": "error",
-  // Require label for all form elements
-  "@angular-eslint/template/accessibility-label-for": "error",
-  // Enforce tabIndex is not greater than 0
-  "@angular-eslint/template/accessibility-tabindex-no-positive": "error",
-  // Enforce elements with click handlers are focusable
-  "@angular-eslint/template/accessibility-elements-content": "error",
-  // Enforce proper heading order
-  "@angular-eslint/template/accessibility-heading-has-content": "error",
-  // Enforce accessible name for buttons
-  "@angular-eslint/template/accessibility-button-name": "error"
-}
-`}</pre>
-      </div>
     </section>
   ),
   'semantic-html': (
@@ -2075,32 +2009,57 @@ export class AccessibleFormComponent implements OnInit {
       </div>
     </section>
   ),
-  checklist: (
-    <section id="checklist" className="section">
-      <h2>Accessibility & Code Quality Checklist</h2>
+  'accessibility-testing': (
+    <section id="accessibility-testing" className="section">
+      <h2>Accessibility Testing: Automated & Manual Approaches</h2>
+      <p>Ensuring ADA compliance in your Angular application requires a combination of automated and manual testing. Automated tools quickly catch many common accessibility issues, but manual testing is essential for identifying nuanced problems that only real users or assistive technologies can reveal.</p>
+      <h3>Automated Testing with AXE Extension</h3>
+      <p><strong>What is AXE?</strong> <br />
+        AXE is a browser extension that analyzes your web page for accessibility issues based on WCAG standards. It highlights problems directly in your browser, explains why they matter, and offers guidance on how to fix them. Automated tools like AXE can catch 30–50% of accessibility issues instantly, saving time and ensuring you don't miss common problems.
+      </p>
+      <p><strong>Types of Issues AXE Detects:</strong></p>
       <ul>
-        <li>Use semantic HTML and ARIA roles</li>
-        <li>Ensure keyboard navigation and visible focus outlines</li>
-        <li>Maintain sufficient color contrast</li>
-        <li>Label all form fields and controls</li>
-        <li>Provide alt text for images and media</li>
-        <li>Test with screen readers and keyboard only</li>
-        <li>Run ESLint with <code>next/core-web-vitals</code> and <code>next/typescript</code> rules</li>
-        <li>Set up Husky to run <code>npm run lint</code> before commits</li>
-        <li>Use automated tools like <code>axe-core</code> or Lighthouse for accessibility testing</li>
+        <li>Missing alt text on images</li>
+        <li>Insufficient color contrast</li>
+        <li>Improper ARIA attributes</li>
+        <li>Elements not reachable by keyboard</li>
+        <li>Form fields without labels</li>
       </ul>
-      <div className="code-block">
-        <pre>{`
-# Install Husky and add pre-commit hook
-npm install husky --save-dev
-npx husky install
-npx husky add .husky/pre-commit "npm run lint"
-
-# Run accessibility tests
-npx axe .
-# or use Lighthouse in Chrome DevTools
-`}</pre>
-      </div>
+      <h4>Step-by-Step: Using AXE Extension</h4>
+      <ol>
+        <li><strong>Install the Extension:</strong> <a href="https://chrome.google.com/webstore/detail/axe-accessibility-linter/dgmpaepbmbhgghoafngkmlcgdjcmjijg" target="_blank" rel="noopener noreferrer">AXE Chrome Extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/" target="_blank" rel="noopener noreferrer">AXE Firefox Extension</a>.</li>
+        <li><strong>Open Your Application:</strong> Navigate to the page you want to test in your Angular app.</li>
+        <li><strong>Open Developer Tools:</strong> Press <code>F12</code> or right-click and select "Inspect" to open your browser's developer tools.</li>
+        <li><strong>Find the AXE Tab:</strong> In DevTools, look for the "axe DevTools" tab.</li>
+        <li><strong>Run an Analysis:</strong> Click "Analyze" to scan the current page for accessibility issues.</li>
+        <li><strong>Review Results:</strong> AXE will display a list of issues, each with a description, affected element(s), and suggestions for fixing.</li>
+        <li><strong>Fix and Re-Test:</strong> Address the issues in your code, then re-run the analysis to ensure they're resolved.</li>
+      </ol>
+      <p><strong>Watch a video tutorial:</strong> <a href="https://www.youtube.com/watch?v=iRGB40c_YJc" target="_blank" rel="noopener noreferrer">How to use the AXE Chrome Extension <span style={{color: '#1976d2'}}>(YouTube)</span></a></p>
+      <p><em>Tip: Integrate <a href="https://www.deque.com/axe/" target="_blank" rel="noopener noreferrer">axe-core</a> into your CI/CD pipeline for continuous accessibility testing.</em></p>
+      <h3>Manual Testing: Screen Readers and Beyond</h3>
+      <p><strong>Why Manual Testing?</strong> <br />
+        Automated tools can't catch everything. Manual testing ensures your app is truly usable for people with disabilities, especially those using assistive technologies like screen readers.
+      </p>
+      <h4>Testing with Screen Readers</h4>
+      <ol>
+        <li><strong>Set Up the Screen Reader:</strong> <ul><li><strong>Windows:</strong> Download and install <a href="https://www.nvaccess.org/download/" target="_blank" rel="noopener noreferrer">NVDA</a>.</li><li><strong>Mac:</strong> Enable VoiceOver with <code>Cmd + F5</code>.</li></ul></li>
+        <li><strong>Navigate with Keyboard:</strong> Use Tab/Shift+Tab to move through interactive elements. Use arrow keys to read content.</li>
+        <li><strong>Listen for:</strong> Proper announcement of headings, links, buttons, and form fields. Logical reading order. Descriptive alt text and labels. Announcements for dynamic content (modals, alerts, etc.).</li>
+        <li><strong>Test Dynamic Content:</strong> Ensure updates (modals, alerts, live regions) are announced appropriately.</li>
+        <li><strong>Common Shortcuts:</strong> <ul><li><strong>NVDA:</strong> <code>Insert + F7</code> (list of links), <code>Insert + F6</code> (list of headings)</li><li><strong>VoiceOver:</strong> <code>Control + Option + U</code> (rotor for navigation)</li></ul></li>
+      </ol>
+      <p><strong>Watch a video tutorial for NVDA:</strong> <a href="https://www.youtube.com/watch?v=aAh1PFsgcBY" target="_blank" rel="noopener noreferrer">How to use NVDA for Accessibility Testing <span style={{color: '#1976d2'}}>(YouTube)</span></a></p>
+      <h4>In-Depth Manual Accessibility Testing Checklist</h4>
+      <ul>
+        <li><strong>Keyboard Navigation:</strong> Tab through all elements. Ensure focus is always visible.</li>
+        <li><strong>Visual Checks:</strong> Is there sufficient color contrast? Are headings used in a logical order? Are images/media provided with meaningful alt text or labels?</li>
+        <li><strong>Forms and Validation:</strong> Are all fields labeled? Are error messages clear and associated with fields? Can forms be submitted and corrected using only the keyboard?</li>
+        <li><strong>Dynamic Content:</strong> Are ARIA live regions used for dynamic updates? Are modal dialogs accessible and focus-trapped?</li>
+        <li><strong>Assistive Technology Compatibility:</strong> Test with browser zoom (up to 200%) and high-contrast modes. Check on mobile devices.</li>
+        <li><strong>User Testing:</strong> If possible, involve users with disabilities in your testing process for real-world feedback.</li>
+      </ul>
+      <p>Combining automated and manual testing is the best way to ensure your Angular application meets ADA compliance and delivers a truly inclusive experience. Use tools like AXE for quick checks, but always supplement with thorough manual testing—especially with screen readers and keyboard navigation. Regularly audit your app as it evolves, and make accessibility a core part of your development workflow.</p>
     </section>
   ),
 };
