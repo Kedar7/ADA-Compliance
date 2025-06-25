@@ -2062,6 +2062,109 @@ export class AccessibleFormComponent implements OnInit {
       <p>Combining automated and manual testing is the best way to ensure your Angular application meets ADA compliance and delivers a truly inclusive experience. Use tools like AXE for quick checks, but always supplement with thorough manual testing—especially with screen readers and keyboard navigation. Regularly audit your app as it evolves, and make accessibility a core part of your development workflow.</p>
     </section>
   ),
+  'focus-trap': (
+    <section id="focus-trap" className="section">
+      <h2>Focus Trap in Angular (with CDK)</h2>
+      <p>Here's a <strong>complete working Angular example</strong> that shows:</p>
+      <ul>
+        <li>✅ <code>cdkTrapFocus</code> for focus trapping</li>
+        <li>✅ <code>FocusMonitor</code> to detect focus origin (keyboard, mouse, touch)</li>
+        <li>✅ Auto-focus input on modal open</li>
+        <li>✅ Modal with subscribe input and submit button</li>
+      </ul>
+      <h3>✅ Step 1: Install Angular CDK</h3>
+      <pre><code>npm install @angular/cdk</code></pre>
+      <h3>✅ Step 2: Import <code>A11yModule</code></h3>
+      <pre><code>{`// app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { A11yModule } from '@angular/cdk/a11y';
+
+import { AppComponent } from './app.component';
+import { ModalComponent } from './modal.component';
+
+@NgModule({
+  declarations: [AppComponent, ModalComponent],
+  imports: [BrowserModule, A11yModule],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}`}</code></pre>
+      <h3>✅ Step 3: Modal HTML + Focus Trap + Input Detection</h3>
+      <pre><code>{`<!-- modal.component.html -->
+<div class="modal" cdkTrapFocus #modalContainer>
+  <h2>Subscribe</h2>
+  <input #emailInput type="text" placeholder="Your email" />
+  <button>Submit</button>
+</div>`}</code></pre>
+      <h3>✅ Step 4: Modal Component with FocusMonitor</h3>
+      <pre><code>{`// modal.component.ts
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
+import { FocusMonitor } from '@angular/cdk/a11y';
+
+@Component({
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css'],
+})
+export class ModalComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('emailInput') emailInput!: ElementRef;
+  @ViewChild('modalContainer') modalContainer!: ElementRef;
+
+  constructor(private focusMonitor: FocusMonitor) {}
+
+  ngAfterViewInit() {
+    // Auto-focus input when modal opens
+    this.emailInput.nativeElement.focus();
+
+    // Monitor how the input gets focus
+    this.focusMonitor.monitor(this.emailInput).subscribe(origin => {
+      console.log('Focused via:', origin); // 'keyboard', 'mouse', 'touch', 'program'
+      if (origin === 'keyboard') {
+        this.emailInput.nativeElement.classList.add('keyboard-focus');
+      } else {
+        this.emailInput.nativeElement.classList.remove('keyboard-focus');
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.focusMonitor.stopMonitoring(this.emailInput);
+  }
+}`}</code></pre>
+      <h3>✅ Optional CSS</h3>
+      <pre><code>{`/* modal.component.css */
+.modal {
+  border: 2px solid #1976d2;
+  padding: 1rem;
+  max-width: 300px;
+  margin: auto;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input.keyboard-focus {
+  outline: 2px solid #1976d2;
+}`}</code></pre>
+      <h3>✅ App Component to Show Modal</h3>
+      <pre><code>{`// app.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: <app-modal></app-modal>,
+})
+export class AppComponent {}`}</code></pre>
+      <p>Let me know if you'd like this as a <a href="#">StackBlitz link</a> or <a href="#">GitHub repo</a> to run it live.</p>
+    </section>
+  ),
 };
 
 type ContentProps = {

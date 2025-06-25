@@ -9,6 +9,7 @@ const sections = [
   { id: 'forms', label: 'Forms' },
   { id: 'images', label: 'Images & Media' },
   { id: 'focus-management', label: 'Focus Management' },
+  { id: 'focus-trap', label: 'Focus Trap' },
   { id: 'error-handling', label: 'Error Handling' },
   { id: 'responsive-design', label: 'Responsive Design' },
   { id: 'language-declaration', label: 'Language Declaration' },
@@ -18,8 +19,7 @@ const sections = [
   { id: 'status-messages', label: 'Status Messages' },
   { id: 'target-size', label: 'Target Size' },
   { id: 'input-purpose', label: 'Input Purpose' },
-  { id: 'testing', label: 'Testing' },
-  { id: 'checklist', label: 'Final Checklist' },
+  { id: 'accessibility-testing', label: 'Accessibility Testing' },
 ];
 
 type SidebarProps = {
