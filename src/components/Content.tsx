@@ -2015,7 +2015,7 @@ export class AccessibleFormComponent implements OnInit {
       <p>Ensuring ADA compliance in your Angular application requires a combination of automated and manual testing. Automated tools quickly catch many common accessibility issues, but manual testing is essential for identifying nuanced problems that only real users or assistive technologies can reveal.</p>
       <h3>Automated Testing with AXE Extension</h3>
       <p><strong>What is AXE?</strong> <br />
-        AXE is a browser extension that analyzes your web page for accessibility issues based on WCAG standards. It highlights problems directly in your browser, explains why they matter, and offers guidance on how to fix them. Automated tools like AXE can catch 30–50% of accessibility issues instantly, saving time and ensuring you don't miss common problems.
+        AXE is a browser extension that analyzes your web page for accessibility issues based on WCAG standards. It highlights problems directly in your browser, explains why they matter, and offers guidance on how to fix them. Automated tools like AXE can catch 30–50% of accessibility issues instantly, saving time and ensuring you don&apos;t miss common problems.
       </p>
       <p><strong>Types of Issues AXE Detects:</strong></p>
       <ul>
@@ -2029,17 +2029,17 @@ export class AccessibleFormComponent implements OnInit {
       <ol>
         <li><strong>Install the Extension:</strong> <a href="https://chrome.google.com/webstore/detail/axe-accessibility-linter/dgmpaepbmbhgghoafngkmlcgdjcmjijg" target="_blank" rel="noopener noreferrer">AXE Chrome Extension</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/" target="_blank" rel="noopener noreferrer">AXE Firefox Extension</a>.</li>
         <li><strong>Open Your Application:</strong> Navigate to the page you want to test in your Angular app.</li>
-        <li><strong>Open Developer Tools:</strong> Press <code>F12</code> or right-click and select "Inspect" to open your browser's developer tools.</li>
-        <li><strong>Find the AXE Tab:</strong> In DevTools, look for the "axe DevTools" tab.</li>
-        <li><strong>Run an Analysis:</strong> Click "Analyze" to scan the current page for accessibility issues.</li>
+        <li><strong>Open Developer Tools:</strong> Press <code>F12</code> or right-click and select &quot;Inspect&quot; to open your browser&apos;s developer tools.</li>
+        <li><strong>Find the AXE Tab:</strong> In DevTools, look for the &quot;axe DevTools&quot; tab.</li>
+        <li><strong>Run an Analysis:</strong> Click &quot;Analyze&quot; to scan the current page for accessibility issues.</li>
         <li><strong>Review Results:</strong> AXE will display a list of issues, each with a description, affected element(s), and suggestions for fixing.</li>
-        <li><strong>Fix and Re-Test:</strong> Address the issues in your code, then re-run the analysis to ensure they're resolved.</li>
+        <li><strong>Fix and Re-Test:</strong> Address the issues in your code, then re-run the analysis to ensure they&apos;re resolved.</li>
       </ol>
       <p><strong>Watch a video tutorial:</strong> <a href="https://www.youtube.com/watch?v=iRGB40c_YJc" target="_blank" rel="noopener noreferrer">How to use the AXE Chrome Extension <span style={{color: '#1976d2'}}>(YouTube)</span></a></p>
       <p><em>Tip: Integrate <a href="https://www.deque.com/axe/" target="_blank" rel="noopener noreferrer">axe-core</a> into your CI/CD pipeline for continuous accessibility testing.</em></p>
       <h3>Manual Testing: Screen Readers and Beyond</h3>
       <p><strong>Why Manual Testing?</strong> <br />
-        Automated tools can't catch everything. Manual testing ensures your app is truly usable for people with disabilities, especially those using assistive technologies like screen readers.
+        Automated tools can&apos;t catch everything. Manual testing ensures your app is truly usable for people with disabilities, especially those using assistive technologies like screen readers.
       </p>
       <h4>Testing with Screen Readers</h4>
       <ol>
@@ -2065,7 +2065,7 @@ export class AccessibleFormComponent implements OnInit {
   'focus-trap': (
     <section id="focus-trap" className="section">
       <h2>Focus Trap in Angular (with CDK)</h2>
-      <p>Here's a <strong>complete working Angular example</strong> that shows:</p>
+      <p>Here&apos;s a <strong>complete working Angular example</strong> that shows:</p>
       <ul>
         <li>✅ <code>cdkTrapFocus</code> for focus trapping</li>
         <li>✅ <code>FocusMonitor</code> to detect focus origin (keyboard, mouse, touch)</li>
@@ -2162,7 +2162,7 @@ import { Component } from '@angular/core';
   template: <app-modal></app-modal>,
 })
 export class AppComponent {}`}</code></pre>
-      <p>Let me know if you'd like this as a <a href="#">StackBlitz link</a> or <a href="#">GitHub repo</a> to run it live.</p>
+      <p>Let me know if you&apos;d like this as a <a href="#">StackBlitz link</a> or <a href="#">GitHub repo</a> to run it live.</p>
     </section>
   ),
 };
