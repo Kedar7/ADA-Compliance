@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Here is the **entire text-only content** of the README file (excluding HTML tags and attributes):
+
+---
+
+# ADA-COMPLIANCE
+
+*Empowering Accessibility, Elevating Digital Experiences Seamlessly*
+
+![last-commit](https://img.shields.io/github/last-commit/Kedar7/ADA-Compliance?style=flat\&logo=git\&logoColor=white\&color=0080ff)
+![repo-top-language](https://img.shields.io/github/languages/top/Kedar7/ADA-Compliance?style=flat\&color=0080ff)
+![repo-language-count](https://img.shields.io/github/languages/count/Kedar7/ADA-Compliance?style=flat\&color=0080ff)
+
+*Built with the tools and technologies:*
+![JSON](https://img.shields.io/badge/JSON-000000.svg?style=flat\&logo=JSON\&logoColor=white)
+![Markdown](https://img.shields.io/badge/Markdown-000000.svg?style=flat\&logo=Markdown\&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837.svg?style=flat\&logo=npm\&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=flat\&logo=JavaScript\&logoColor=black)
+![React](https://img.shields.io/badge/React-61DAFB.svg?style=flat\&logo=React\&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=flat\&logo=TypeScript\&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3.svg?style=flat\&logo=ESLint\&logoColor=white)
+
+---
+
+## Table of Contents
+
+* [Overview](#overview)
+* [Getting Started](#getting-started)
+
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Testing](#testing)
+
+---
+
+## Overview
+
+**ADA-Compliance** is a modern, Next.js-based developer tool crafted to facilitate the creation of accessible and high-performance web applications. It combines cutting-edge frontend technologies with a focus on inclusive design, making it easier for developers to build compliant digital experiences.
+
+**Why ADA-Compliance?**
+This project aims to streamline accessible development with a robust, scalable architecture. The core features include:
+
+* 🟢 **\[Emoji] Next.js Optimization:** Delivers fast, dynamic pages with seamless server-side rendering and static site generation.
+* 🔵 **\[Emoji] Tailwind CSS Integration:** Enables utility-first styling for maintainable and scalable UI design.
+* 🟠 **\[Emoji] Accessibility Focus:** Incorporates ARIA labels, skip links, and ADA compliance standards to promote inclusive experiences.
+* 🟣 **\[Emoji] Modular Architecture:** Features components like Sidebar and Content for easy customization and extension.
+* 🟡 **\[Emoji] TypeScript & ESLint:** Ensures code quality, consistency, and modern JavaScript standards.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project requires the following dependencies:
+
+* **Programming Language:** TypeScript
+* **Package Manager:** Npm
+
+### Installation
+
+Build ADA-Compliance from the source and install dependencies:
+
+**1. Clone the repository:**
+
+```sh
+❯ git clone https://github.com/Kedar7/ADA-Compliance
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2. Navigate to the project directory:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+❯ cd ADA-Compliance
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**3. Install the dependencies:**
 
-## Learn More
+Using [npm](https://www.npmjs.com/):
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+❯ npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the project with:
 
-## Deploy on Vercel
+Using [npm](https://www.npmjs.com/):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Testing
+
+Ada-compliance uses the **{test\_framework}** test framework. Run the test suite with:
+
+Using [npm](https://www.npmjs.com/):
+
+```sh
+npm test
+```
+
+---
+
+⬆ Return
+
+---
+
+Let me know if you want this in a downloadable `.md` file or styled version.
