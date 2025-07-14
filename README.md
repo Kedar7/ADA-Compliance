@@ -39,12 +39,6 @@
 **Why ADA-Compliance?**
 This project aims to streamline accessible development with a robust, scalable architecture. The core features include:
 
-* 🟢 Next.js Optimization:** Delivers fast, dynamic pages with seamless server-side rendering and static site generation.
-* 🔵 Tailwind CSS Integration:** Enables utility-first styling for maintainable and scalable UI design.
-* 🟠 Accessibility Focus:** Incorporates ARIA labels, skip links, and ADA compliance standards to promote inclusive experiences.
-* 🟣 Modular Architecture:** Features components like Sidebar and Content for easy customization and extension.
-* 🟡 TypeScript & ESLint:** Ensures code quality, consistency, and modern JavaScript standards.
-
 ---
 
 ## Getting Started
@@ -100,9 +94,4 @@ Using [npm](https://www.npmjs.com/):
 npm test
 ```
 
----
-
-⬆ Return
-
----
 
